@@ -11,8 +11,10 @@ public class Main
         new Course("English AP", 1, true),
         new Course("History CP", 1, false),
         new Course("Math AP", 1, true),
+        new Course("Math CP", 1, true),
         new Course("Science CP", 1, false),
-        new Course("Perf. Arts", 1, false)
+        new Course("Physics AP", 1, true),
+        new Course("Perf. Arts", 3, false)
     };
     
     public static void main(String[] args)
