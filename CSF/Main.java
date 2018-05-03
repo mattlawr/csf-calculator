@@ -11,7 +11,7 @@ public class Main
         new Course("English AP", 1, true),
         new Course("History CP", 1, false),
         new Course("Math AP", 1, true),
-        new Course("Math CP", 1, true),
+        new Course("Math CP", 1, false),
         new Course("Science CP", 1, false),
         new Course("Physics AP", 1, true),
         new Course("Perf. Arts", 3, false)
@@ -71,6 +71,8 @@ class Window extends Frame
         
         // Set frame
         setSize(650,300);
+        setTitle("CSF Calculator 2018");
+        setBackground(Color.white);
         setLayout(null);
         setVisible(true);
     }
