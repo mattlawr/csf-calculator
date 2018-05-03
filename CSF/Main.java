@@ -16,12 +16,15 @@ public class Main
         new Course("Physics AP", 1, true),
         new Course("Perf. Arts", 3, false)
     };
+    static String[] grades = { "A", "B", "C" };
     
     public static void main(String[] args)
     {
         Window w = new Window();
         w.setCoursesList(courses);
-        w.setCourseChoices(CourseNames(courses));
+        //w.setCourseChoices(CourseNames(courses));
+        //w.setGradeChoices(grades);
+        w.setChoices(CourseNames(courses), grades);
     }
     
     static String[] CourseNames(Course[] courses) {
@@ -37,6 +40,8 @@ public class Main
 class Window extends Frame
 {
     Choice[] choiceCourses = new Choice[5];
+    Choice[] choiceGrades = new Choice[5];
+    
     Course[] chosenCourses = new Course[5];
     Course[] coursesList;
     int score = 0;
@@ -58,7 +63,7 @@ class Window extends Frame
         // Events
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                chosenCourses = findCourses(choiceCourses, coursesList);
+                chosenCourses = findCourses(choiceCourses, choiceGrades, coursesList);
                 int sc = getTotalScore();
                 label1.setText("SCORE: " + sc);
             }
@@ -73,27 +78,47 @@ class Window extends Frame
     public void setCoursesList(Course[] c) {
         coursesList = c;
     }
-    public static Course[] findCourses(Choice[] cs, Course[] cl){
+    // Return selected courses (Course[] cl) based on (Choice[] cs) and (Choice[] gr)
+    public static Course[] findCourses(Choice[] cs, Choice[] gr, Course[] cl)
+    {
         ArrayList<Course> list = new ArrayList<Course>();
-        for(Choice c : cs){
+        int index = 0;
+        for(Choice c : cs)
+        {
             int i = c.getSelectedIndex();
-            list.add(cl[i]);
+            Course coursePair = cl[i];// To set grade int
+            coursePair.setGrade(gr[index].getSelectedItem());// Based on gradeChoice[index]
+            
+            list.add(coursePair);
+            
+            index++;
         }
         
         Course[] cArr = list.toArray(new Course[0]);
         return cArr;
     }
-    public void setCourseChoices(String[] choices)// Sets courseChoices
+    public void setChoices(String[] courses, String[] grades)
     {
-        final int width = 120;
-        for(int i = 0; i < choiceCourses.length; i++)
-        {
-            choiceCourses[i] = setChoiceOptions(choices);
-            choiceCourses[i].setBounds(20+(width*i),120,width,20);
-            add(choiceCourses[i]);
-        }
+        int w = 120;
+        choiceCourses = setUIChoices(courses, 5, new int[]{ 20,120,w,20 });
+        choiceGrades = setUIChoices(grades, 5, new int[]{ 20,150,w,20 });
     }
-    public static Choice setChoiceOptions(String[] choices)
+    
+    public Choice[] setUIChoices(String[] choices, int count, int[] rect)// Returns choices
+    {
+        //final int w = 120;
+        // int[] a = { 20+(w*i),150, w,20 }
+        int w = rect[2];
+        Choice[] ch = new Choice[count];
+        for(int i = 0; i < count; i++)
+        {
+            ch[i] = setChoiceOptions(choices);
+            ch[i].setBounds(rect[0]+(w*i),rect[1],w,rect[3]);
+            add(ch[i]);// For awt
+        }
+        return ch;
+    }
+    public static Choice setChoiceOptions(String[] choices)// Returns Choice with arg
     {
         Choice choice = new Choice();
         for(String c : choices)
@@ -107,7 +132,7 @@ class Window extends Frame
         int s = 0;
         for(Course c : chosenCourses)
         {
-            s += c.getScore(2);// A grade
+            s += c.getScore();// Grade
         }
         return s;
     }

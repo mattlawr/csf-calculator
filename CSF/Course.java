@@ -7,6 +7,8 @@ public class Course
     int listNum = 1;// [1 - 3]; 0 is N/A
     boolean ap = false;
     
+    int grade = 0;
+    
     // GRADE: 0=C, 1=B, 2=A
     /*
      * RULES:
@@ -37,13 +39,35 @@ public class Course
     
     public String getName(){ return name; }
     
+    public void setGrade(int a)
+    {
+        grade = a;
+    }
+    public void setGrade(String gr)
+    {
+        int a = StringToGrade(gr);
+        grade = a;
+    }
+    int StringToGrade(String g){
+        int a = 0;
+        a = (g=="A") ? 2 : a;
+        a = (g=="B") ? 1 : a;
+        return a;
+    }
+    public int getScore()
+    {
+        return getScore(grade);
+    }
     public int getScore(int grade)
     {
         int score = 0;
         score = grade;
-        score = (ap) ? (score+1) : (score);
+        if(grade <= 0) { return 0; }// C or below
         
-        score = (listNum==0) ? 0 : (score);
+        score = (grade==2) ? 3 : (score);// If grade is A, score = 3 pts
+        score = (ap) ? (score+1) : (score);// If AP/Honors, add 1 pt
+        
+        score = (listNum==0) ? 0 : (score);// If course is N/A, no pts
         
         return score;
     }
