@@ -1,10 +1,11 @@
 // May 1, 2018
 
+import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Main
+public class Main extends Applet
 {
     static Course[] courses = {
         new Course(),
@@ -18,7 +19,7 @@ public class Main
     };
     static String[] grades = { "A", "B", "C" };
     
-    public static void main(String[] args)
+    public void init()
     {
         Window w = new Window();
         w.setCoursesList(courses);
@@ -48,12 +49,17 @@ class Window extends Frame
     Course[] coursesList;
     int score = 0;
     
+    /*public void actionPerformed(ActionEvent event)
+    {
+        
+    }*/
+    
     Window()
     {
         addWindowListener(new WindowAdapter() {  
             public void windowClosing(WindowEvent e) {  
                 dispose();  
-            }  
+            }
         });
         
         // Create components
