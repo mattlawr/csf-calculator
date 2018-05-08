@@ -25,6 +25,7 @@ public class Main
         //w.setCourseChoices(CourseNames(courses));
         //w.setGradeChoices(grades);
         w.setChoices(CourseNames(courses), grades);
+        w.setUI();
     }
     
     static String[] CourseNames(Course[] courses) {
@@ -41,6 +42,7 @@ class Window extends Frame
 {
     Choice[] choiceCourses = new Choice[5];
     Choice[] choiceGrades = new Choice[5];
+    Label[] courseScores = new Label[5];
     
     Course[] chosenCourses = new Course[5];
     Course[] coursesList;
@@ -66,6 +68,8 @@ class Window extends Frame
                 chosenCourses = findCourses(choiceCourses, choiceGrades, coursesList);
                 int sc = getTotalScore();
                 label1.setText("SCORE: " + sc);
+                
+                findScores(courseScores, chosenCourses);
             }
         });
         
@@ -99,6 +103,22 @@ class Window extends Frame
         Course[] cArr = list.toArray(new Course[0]);
         return cArr;
     }
+    static Label[] findScores(Label[] labels, Course[] courses)// Returns label array with printed scores
+    {
+        int count = courses.length;
+        for(int i = 0; i < count; i++) {
+            labels[i].setText(courses[i].getScore() + "");
+        }
+        return labels;
+    }
+    public void setUI()
+    {
+        int w = 120;
+        Label[] scoreLabels = new Label[5];
+        for(int i = 0; i < scoreLabels.length; i++) { scoreLabels[i] = new Label(); scoreLabels[i].setText("--"); }
+        
+        courseScores = CompToLabel(setUIRow(scoreLabels, new int[]{ 20,180,w,20 }));
+    }
     public void setChoices(String[] courses, String[] grades)
     {
         int w = 120;
@@ -106,10 +126,23 @@ class Window extends Frame
         choiceGrades = setUIChoices(grades, 5, new int[]{ 20,150,w,20 });
     }
     
+    public Component[] setUIRow(Component[] baseComps, int[] rect)// Returns components
+    {
+        int w = rect[2];// width
+        int count = baseComps.length;
+        Component[] comp = new Component[count];
+        for(int i = 0; i < count; i++)
+        {
+            comp[i] = baseComps[i];
+            comp[i].setBounds(rect[0]+(w*i),rect[1],w,rect[3]);
+            
+            add(comp[i]);// For AWT ***
+        }
+        return comp;
+    }
+    
     public Choice[] setUIChoices(String[] choices, int count, int[] rect)// Returns choices
     {
-        //final int w = 120;
-        // int[] a = { 20+(w*i),150, w,20 }
         int w = rect[2];
         Choice[] ch = new Choice[count];
         for(int i = 0; i < count; i++)
@@ -137,5 +170,13 @@ class Window extends Frame
             s += c.getScore();// Grade
         }
         return s;
+    }
+    
+    Label[] CompToLabel(Component[] cArr) {
+        Label[] arr = new Label[cArr.length];
+        for(int i = 0; i < cArr.length; i++) {
+            arr[i] = (Label)cArr[i];
+        }
+        return arr;
     }
 }
