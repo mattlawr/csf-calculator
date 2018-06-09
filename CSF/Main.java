@@ -1,11 +1,11 @@
 // May 1, 2018
 
-import java.applet.*;
+//import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-public class Main extends Applet
+public class Main
 {
     static Course[] courses = {
         new Course(),
@@ -19,7 +19,7 @@ public class Main extends Applet
     };
     static String[] grades = { "A", "B", "C" };
     
-    public void init()
+    public static void main(String[] args)
     {
         Window w = new Window();
         w.setCoursesList(courses);
