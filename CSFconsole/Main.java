@@ -36,31 +36,41 @@ public class Main
             System.out.println(
                                "\nPlease enter an option: \n[1] - Edit report\n[2] - Print report\n\n[3] - Reset\n[4] - Exit");
             choice = input.nextInt();
+            input.nextLine();// Consumes \n char!
+            
             System.out.println("");
             // using a switch statement to execute the different calculator methods
             switch (choice) {
                 case 1:
                     report.PrintReport();
                     System.out.println("Enter course ID to edit:");
-                    int id = input.nextInt(); pause(100);
+                    int id = input.nextInt();
+                    input.nextLine();// Consumes \n char for nextInt() to work
+                    pause(200);
                     System.out.println("Enter course name:");
-                    String cName = input.next(); pause(100);
-                    System.out.println("Is AP course? [y/n]:");
-                    boolean cAP = (input.next() == "y") ? true:false; pause(100);
+                    String cName = input.nextLine();
+                    pause(200);
+                    System.out.println("Is AP/Honors course? [y/n]:");
+                    String cStringAP = input.nextLine();
+                    boolean cAP = cStringAP.contains("y");
+                    pause(200);
                     System.out.println("Enter course grade [A/B/C]:");
-                    String cGrade = input.next(); pause(100);
+                    String cGrade = input.nextLine();
+                    pause(200);
                     
                     report.choiceCourses[id] = new Course(cName, 1, cAP);
                     report.choiceCourses[id].setGrade(cGrade);
                     //System.out.println(cGrade + "-" + report.choiceCourses[id].getGrade());
                     
-                    System.out.println("Course overwritten.");
+                    System.out.println("Course overwritten:");
                     
-                    pause(1000);
+                    report.PrintCourse(id);
+                    promptEnterKey();
                     break;
                 case 2:
                     // Using csfReport class
                     report.PrintReport();
+                    promptEnterKey();
                     break;
                 case 3:
                     // Using csfReport class
@@ -101,6 +111,12 @@ public class Main
             System.out.println("interrupted");
         }
     }
+    static void promptEnterKey(){
+        System.out.println("\nPress \"ENTER\" to continue...");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        scanner.close();
+    }
 }
 
 // Holds methods and data for the user's selected grades
@@ -121,19 +137,37 @@ class csfReport
     {
         String leftAlignFormat = "| %-2d | %-15s | %5s | %5d |%n";
         
+        System.out.format("* = AP/Honors course%n");
         System.out.format("+----+-----------------+-------+-------+%n");
         System.out.format("| ID | Course          | Grade | Value |%n");
         System.out.format("+----+-----------------+-------+-------+%n");
         for (int i = 0; i < choiceCourses.length; i++)
         {
+            String ap = "";
+            if(choiceCourses[i].getAP()){ ap = "*"; }
+            
             System.out.format(leftAlignFormat,
                               i,
-                              choiceCourses[i].getName(),
+                              choiceCourses[i].getName() + ap,
                               choiceCourses[i].getGrade(),
                               choiceCourses[i].getScore());
         }
         System.out.format("+----+-----------------+-------+-------+%n");
         System.out.format(leftAlignFormat, 0, "", "TOTAL", getTotalScore());
+    }
+    
+    public void PrintCourse(int i)
+    {
+        String leftAlignFormat = "| %-2d | %-15s | %5s | %5d |%n";
+        
+        System.out.format("* = AP/Honors course%n");
+        System.out.format("| ID | Course          | Grade | Value |%n");
+        System.out.format("%n");
+        
+        String ap = "";
+        if(choiceCourses[i].getAP()){ ap = "*"; }
+            
+        System.out.format(leftAlignFormat, i, choiceCourses[i].getName() + ap, choiceCourses[i].getGrade(), choiceCourses[i].getScore());
     }
     
     public int getTotalScore()

@@ -39,6 +39,7 @@ public class Course
     
     public String getName(){ return name; }
     public String getGrade(){ return GradeToString(grade); }
+    public boolean getAP(){ return ap; }
     
     public void setGrade(int a)
     {
