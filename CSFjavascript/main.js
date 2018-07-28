@@ -15,12 +15,16 @@ function updateReport() {
     for (i = 1; i < rows.length; i++) {
         var items = rows[i].getElementsByTagName("TD");
 
-        items[0].innerHTML = i;
+        //items[0].innerHTML = i;
         items[1].innerHTML = courses[i].getNameAP();
         items[2].innerHTML = GradeToText(courses[i].grade);
         items[3].innerHTML = GetScore(courses[i].grade, courses[i].ap);
     }
     document.getElementById("total").innerHTML = "TOTAL = " + GetTotalScore();
+
+    var resText = "STUDENT NOT ELIGIBLE; NEED " + (10 - GetTotalScore()) + " MORE POINTS (10 TOTAL)";
+    if (GetTotalScore() >= 10) {resText = "STUDENT ELIGIBLE; 10 POINTS MET"}
+    document.getElementById("result").innerHTML = resText;
 }
 
 function editCourses() {

@@ -46,10 +46,12 @@
     <title>CSF Calculator 2018</title>
 </head>
 <body>
-    <p>CSF Calculator: Javascript Edition</p>
-    <p>by Matthew Lawrence</p>
+    <p>CSF Calculator: Javascript Edition <div style="font-size:small">by Matthew Lawrence</div></p>
+
+    <p style="font-size:small">NOTE: Does not yet support LIST checks</p>
     <hr>
-    <p><button onclick="editCourses()">Edit courses</button></p>
+    <!--<p><button onclick="editCourses()">Edit courses</button></p>-->
+    <p style="font-size:small">Use buttons to edit courses:</p>
     <table id="cTable" style="width:100%">
         <tr>
             <th>ID</th>
@@ -58,31 +60,31 @@
             <th>Score</th>
         </tr>
         <tr>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
-        </tr>
-        <tr>
-            <td>--</td>
+            <td><button onclick="editCourse(1)">1</button></td>
             <td>--</td>
             <td>--</td>
             <td>--</td>
         </tr>
         <tr>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
-        </tr>
-        <tr>
-            <td>--</td>
+            <td><button onclick="editCourse(2)">2</button></td>
             <td>--</td>
             <td>--</td>
             <td>--</td>
         </tr>
         <tr>
+            <td><button onclick="editCourse(3)">3</button></td>
             <td>--</td>
+            <td>--</td>
+            <td>--</td>
+        </tr>
+        <tr>
+            <td><button onclick="editCourse(4)">4</button></td>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+        </tr>
+        <tr>
+            <td><button onclick="editCourse(5)">5</button></td>
             <td>--</td>
             <td>--</td>
             <td>--</td>
@@ -90,6 +92,7 @@
     </table>
 
     <p id="total">TOTAL = 0</p>
+    <p id="result">NEED 10 POINTS</p>
 
     <script src="CSFjavascript/main.js"></script>
 </body>
