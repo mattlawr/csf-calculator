@@ -1,5 +1,6 @@
 // May 1, 2018
 
+//import java.applet.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -48,12 +49,17 @@ class Window extends Frame
     Course[] coursesList;
     int score = 0;
     
+    /*public void actionPerformed(ActionEvent event)
+    {
+        
+    }*/
+    
     Window()
     {
         addWindowListener(new WindowAdapter() {  
             public void windowClosing(WindowEvent e) {  
                 dispose();  
-            }  
+            }
         });
         
         // Create components
