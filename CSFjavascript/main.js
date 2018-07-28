@@ -20,6 +20,7 @@ function updateReport() {
         items[2].innerHTML = GradeToText(courses[i].grade);
         items[3].innerHTML = GetScore(courses[i].grade, courses[i].ap);
     }
+    document.getElementById("total").innerHTML = "TOTAL = " + GetTotalScore();
 }
 
 function editCourses() {
@@ -83,6 +84,15 @@ function GetScore(g, ap)
     score = (ap) ? (score + 1) : (score);// If AP/Honors, add 1 pt
 
     //score = (listNum == 0) ? 0 : (score);// If course is N/A, no pts
+
+    return score;
+}
+function GetTotalScore() {
+    var score, i;
+    score = 0;
+    for (i = 1; i < courses.length; i++) {
+        score += GetScore(courses[i].grade, courses[i].ap);
+    }
 
     return score;
 }

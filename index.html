@@ -1,6 +1,19 @@
 ﻿<!DOCTYPE html>
 
 <style>
+    body, h1, h2, h3, h4, h5, h6 {
+        font-family: "Helvetica", sans-serif;
+        src: url("fonts/helvetica.woff") format('woff');
+        color: #c4bebd;
+    }
+
+    body, html {
+        height: 100%;
+        background: #121212;
+        color: #c4bebd;
+        line-height: 1.5;
+    }
+
     table {
         border-spacing: 0;
         width: 100%;
@@ -13,8 +26,16 @@
     }
 
     tr:nth-child(even) {
-        background-color: #f2f2f2
+        background-color: #333
     }
+
+    /* Change scaling for tablets and phones */
+    /*@media only screen and (max-device-width: 1024px) {
+
+        .grid-item-c, .grid-item-b {
+            margin-left: 0%;
+        }
+    }*/
 </style>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -65,6 +86,8 @@
             <td>--</td>
         </tr>
     </table>
+
+    <p id="total">TOTAL = 0</p>
 
     <script src="CSFjavascript/main.js"></script>
 </body>
