@@ -42,10 +42,10 @@ function updateReport() {
 
     var totalCheck = "<b>TOTAL:</b> " + ((GetTotalScore() >= 10) ? "10 POINTS MET" : ("NEED " + (10 - GetTotalScore()) + " MORE POINTS (10 minimum)"));
 
-	var finText = (checkReq()) ? "<b>STUDENT NOT ELIGIBLE</b>" : "<b>STUDENT ELIGIBLE</b>";
+	var finText = (checkReq()) ? "<b>STUDENT ELIGIBLE</b>" : "<b>STUDENT NOT ELIGIBLE</b>";
 	var br = "<br>";
 
-    document.getElementById("result").innerHTML = (listICheck + br + listDouCheck + br + listIIICheck + br + totalCheck + br + finText);
+    document.getElementById("result").innerHTML = (listICheck + br + listDouCheck + br + listIIICheck + br + totalCheck + br + finText + br);
 }
 function updateReq() {
     reqData = NewReqDataObject();// Reset all values
